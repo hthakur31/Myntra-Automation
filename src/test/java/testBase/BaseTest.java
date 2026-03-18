@@ -1,58 +1,112 @@
 package testBase;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class BaseTest {
 
-	public WebDriver driver;
-	public Properties p;
-	public Logger logger;
+    public Logger logger;
+    public Properties p;
+    public static WebDriver driver;
+    public WebDriverWait wait;
 
-	@BeforeClass
-	@Parameters({ "os", "browser" })
-	public void setUp(String os, String br) throws IOException {
-		FileReader file = new FileReader("./src//test//resources//config.properties");
-		p = new Properties();
-		p.load(file);
+    // ================= Setup =================
+    @BeforeClass
+    @Parameters({"os", "browser"})
+    public void setup(@Optional("windows") String os,
+                      @Optional("chrome") String br) throws IOException {
 
-		logger = LogManager.getLogger(this.getClass()); // logger
+        // Load config.properties file
+        FileReader file = new FileReader("./src/test/resources/config.properties");
+        p = new Properties();
+        p.load(file);
 
-		if (p.getProperty("environment").equalsIgnoreCase("local")) {
-			switch (br.toLowerCase()) {
-			case "chrome":
-				driver = new ChromeDriver();
-				break;
-			case "edge":
-				driver = new EdgeDriver();
-				break;
-			case "firefox":
-				driver = new FirefoxDriver();
-				break;
-			default:
-				System.out.println("Incorrect browser choice");
-			}
-		}
-		driver.manage().deleteAllCookies();
-		driver.get(p.getProperty("appURL"));
-		driver.manage().window().maximize();
+        logger = LogManager.getLogger(this.getClass());
 
-	}
+        // Browser selection
+        switch (br.toLowerCase()) {
 
-	@AfterClass
-	public void terminate() {
-		driver.quit();
-	}
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+
+            default:
+                System.out.println("Invalid browser name");
+                return;
+        }
+
+        driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get(p.getProperty("appURL"));
+        driver.manage().window().maximize();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    // ================= TearDown =================
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+    // ================= Random Utility Methods =================
+
+    public String randomString() {
+        return RandomStringUtils.randomAlphabetic(5);
+    }
+
+    public String randomEmail() {
+        return RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
+    }
+
+    public String randomNumber() {
+        return RandomStringUtils.randomNumeric(10);
+    }
+
+    public String randomAlphaNumeric() {
+        return RandomStringUtils.randomAlphabetic(3)
+                + "@"
+                + RandomStringUtils.randomNumeric(3);
+    }
+//ScreenShort
+    public String captureScreen(String tname) throws IOException {
+    	String  timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		TakesScreenshot takeScreenShot = (TakesScreenshot) driver;
+		File source = takeScreenShot.getScreenshotAs(OutputType.FILE);
+		String destination = System.getProperty("user.dir") + "/Screenshots\\" + tname + "_"+ timeStamp + ".png";
+		File finalDestination = new File(destination);
+		
+        source.renameTo(finalDestination);
+        return destination;
+    }
 }
