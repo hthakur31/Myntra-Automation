@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-18T17:36:43 IST" name="Default suite" finished-at="2026-03-18T17:37:41 IST" duration-ms="58061">
+  <suite started-at="2026-03-18T18:59:25 IST" name="Default suite" finished-at="2026-03-18T19:00:09 IST" duration-ms="44472">
     <groups>
     </groups>
-    <test started-at="2026-03-18T17:36:43 IST" name="Default test" finished-at="2026-03-18T17:37:41 IST" duration-ms="58061">
-      <class name="testCases.TC_002InitialPrice">
-        <test-method is-config="true" signature="setup(java.lang.String,java.lang.String)[pri:0, instance:testCases.TC_002InitialPrice@266374ef]" started-at="2026-03-18T17:36:43 IST" name="setup" finished-at="2026-03-18T17:36:53 IST" duration-ms="9628" status="PASS">
+    <test started-at="2026-03-18T18:59:25 IST" name="Default test" finished-at="2026-03-18T19:00:09 IST" duration-ms="44472">
+      <class name="testCases.TC_004priceLowToHigh">
+        <test-method is-config="true" signature="setup(java.lang.String,java.lang.String)[pri:0, instance:testCases.TC_004priceLowToHigh@266374ef]" started-at="2026-03-18T18:59:25 IST" name="setup" finished-at="2026-03-18T18:59:31 IST" duration-ms="5758" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -23,15 +23,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyPriceFromProductPage()[pri:0, instance:testCases.TC_002InitialPrice@266374ef]" started-at="2026-03-18T17:36:53 IST" name="verifyPriceFromProductPage" finished-at="2026-03-18T17:37:40 IST" duration-ms="47251" status="PASS">
+        <test-method signature="verifyPriceFromProductPage()[pri:0, instance:testCases.TC_004priceLowToHigh@266374ef]" started-at="2026-03-18T18:59:31 IST" name="verifyPriceFromProductPage" finished-at="2026-03-18T19:00:09 IST" duration-ms="38038" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyPriceFromProductPage -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_002InitialPrice@266374ef]" started-at="2026-03-18T17:37:40 IST" name="tearDown" finished-at="2026-03-18T17:37:41 IST" duration-ms="996" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testCases.TC_004priceLowToHigh@266374ef]" started-at="2026-03-18T19:00:09 IST" name="tearDown" finished-at="2026-03-18T19:00:09 IST" duration-ms="546" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- testCases.TC_002InitialPrice -->
+      </class> <!-- testCases.TC_004priceLowToHigh -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
