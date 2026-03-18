@@ -37,7 +37,7 @@ public class ExtentReport implements ITestListener {
 
         repName = "Test-Report-" + timeStamp + ".html";
 
-        sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "\\report\\" + repName);
+        sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "\\reports\\" + repName);
 
         sparkReporter.config().setDocumentTitle("mynthra Automation Report");
         sparkReporter.config().setReportName("Functional Testing");

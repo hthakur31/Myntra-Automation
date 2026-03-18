@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
 
+
+<suite name="Suite">
 <listeners>
     <listener class-name="utilities.ExtentReport"/>
 </listeners>
 
-	<test thread-count="5" name="master">
-		
-		<parameter name="os" value="windows" />
-		<parameter name="browser" value="chrome" />
-		
-		<classes>
-			<class name="testCases.TC_002InitialPrice" />
-		</classes>
-	</test> <!--
-	master -->
-</suite> <!--
-Suite -->
+
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="testCases.TC_003PriceHighToLow"/>
+      <class name="testCases.TC_004priceLowToHigh"/>
+      <class name="testCases.TC_002InitialPrice"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
